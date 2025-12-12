@@ -18,6 +18,8 @@ int main() {
         cout << "7. Hapus Produk" << endl;
         cout << "8. Total Stok Semua Produk" << endl;
         cout << "9. Produk dengan Stok Paling Sedikit" << endl;
+        cout << "10. Urutkan Berdasarkan Harga" << endl;
+
         cout << "0. Keluar" << endl;
         cout << "Pilih menu: ";
         cin >> pilihan;
@@ -113,7 +115,10 @@ int main() {
             } else {
                 cout << "Data masih kosong." << endl;
             }
+        } else if (pilihan == 10) {
+            sortProdukByHarga(L);
         }
+
 
     } while (pilihan != 0);
 

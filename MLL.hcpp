@@ -74,5 +74,7 @@ void deleteProduk_103012400173(ListKategori &L, int id);
 /* ============== UTIL ============== */
 int totalStok_103012400173(ListKategori L);
 adrProduk produkStokMinimum_103012400173(ListKategori L);
+void sortProdukByHarga(ListKategori &L);
+
 
 #endif

@@ -194,3 +194,35 @@ adrProduk produkStokMinimum_103012400173(ListKategori L) {
     }
     return minP;
 }
+
+void sortProdukByHarga(ListKategori &L) {
+    adrKategori K = L.first;
+
+    while (K != NULL) {
+        adrProduk P = K->firstProduk;
+
+        if (P != NULL && P->next != NULL) {
+            bool swapped;
+
+            do {
+                swapped = false;
+                adrProduk Q = K->firstProduk;
+
+                while (Q->next != NULL) {
+                    if (Q->info.harga > Q->next->info.harga) {
+                        // tukar info
+                        Produk temp = Q->info;
+                        Q->info = Q->next->info;
+                        Q->next->info = temp;
+                        swapped = true;
+                    }
+                    Q = Q->next;
+                }
+            } while (swapped);
+        }
+
+        K = K->next;
+    }
+
+    cout << "Produk berhasil diurutkan berdasarkan harga (ascending)." << endl;
+}
