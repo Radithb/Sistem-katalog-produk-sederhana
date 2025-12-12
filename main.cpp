@@ -1,5 +1,5 @@
 #include <iostream>
-#include "MLL.h"
+#include "tubesMLL.h"
 using namespace std;
 
 int main() {
@@ -19,7 +19,7 @@ int main() {
         cout << "8. Total Stok Semua Produk" << endl;
         cout << "9. Produk dengan Stok Paling Sedikit" << endl;
         cout << "10. Urutkan Berdasarkan Harga" << endl;
-
+        cout << "11. Produk Stok Terendah" << endl;
         cout << "0. Keluar" << endl;
         cout << "Pilih menu: ";
         cin >> pilihan;
@@ -117,11 +117,24 @@ int main() {
             }
         } else if (pilihan == 10) {
             sortProdukByHarga(L);
-        }
-
+        } else if (pilihan == 11) {
+            adrProduk P = produkStokMinimum_103012400173(L);
+            if (P != NULL) {
+            cout << "\n=== Produk dengan Stok Paling Rendah ===" << endl;
+            cout << "ID      : " << P->info.id << endl;
+            cout << "Nama    : " << P->info.namaProduk << endl;
+            cout << "Harga   : " << P->info.harga << endl;
+            cout << "Stok    : " << P->info.stok << endl;
+            cout << "Total   : " << P->info.harga * P->info.stok << endl;
+        } else {
+            cout << "Tidak ada data produk!" << endl;
+    }
+}
 
     } while (pilihan != 0);
 
     cout << "Program selesai." << endl;
     return 0;
 }
+
+
