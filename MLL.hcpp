@@ -1,0 +1,78 @@
+#ifndef MLL_H
+#define MLL_H
+
+#include <iostream>
+#include <string>
+using namespace std;
+
+// Forward Declaration
+struct elemenKategori;
+struct elemenProduk;
+
+// Typedef Pointer
+typedef elemenKategori* adrKategori;
+typedef elemenProduk* adrProduk;
+
+/* ===== INFO KATEGORI ===== */
+struct Kategori {
+    string namaKategori;
+};
+
+/* ===== INFO PRODUK ===== */
+struct Produk {
+    int id;
+    string namaProduk;
+    float harga;
+    int stok;
+};
+
+/* ===== ELEMEN PRODUK (CHILD) ===== */
+struct elemenProduk {
+    Produk info;
+    adrProduk next;
+    adrProduk prev;
+};
+
+/* ===== ELEMEN KATEGORI (PARENT) ===== */
+struct elemenKategori {
+    Kategori info;
+    adrKategori next;
+    adrKategori prev;
+    adrProduk firstProduk;   // pointer ke child
+};
+
+/* ===== LIST KATEGORI ===== */
+struct ListKategori {
+    adrKategori first;
+    adrKategori last;
+};
+
+/* ================= PRIMITIVES ================= */
+void createList_103012400173(ListKategori &L);
+
+adrKategori createKategori_103012400173(string namaKategori);
+adrProduk createProduk_103012400173(int id, string nama, float harga, int stok);
+
+/* ============== INSERT OPERATIONS ============== */
+void insertLastKategori_103012400173(ListKategori &L, adrKategori P);
+void insertProdukToKategori_103012400173(ListKategori &L, string namaKategori, adrProduk P);
+
+/* ============== DISPLAY ============== */
+void displayKategori_103012400173(ListKategori L);
+void displayProduk_103012400173(ListKategori L);
+
+/* ============== SEARCH ============== */
+adrKategori searchKategori_103012400173(ListKategori L, string namaKategori);
+adrProduk searchProdukByID_103012400173(ListKategori L, int id);
+
+/* ============== UPDATE ============== */
+bool updateProduk_103012400173(ListKategori &L, int id, string namaBaru, float hargaBaru, int stokBaru);
+
+/* ============== DELETE ============== */
+void deleteProduk_103012400173(ListKategori &L, int id);
+
+/* ============== UTIL ============== */
+int totalStok_103012400173(ListKategori L);
+adrProduk produkStokMinimum_103012400173(ListKategori L);
+
+#endif
