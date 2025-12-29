@@ -1,5 +1,6 @@
 #include <iostream>
-#include "tubesMLL.h"
+#include "TUBES.h"
+
 using namespace std;
 
 int main() {
@@ -7,7 +8,7 @@ int main() {
     createList_103012400173(L);
 
     int pilihan;
-    do {
+    while (pilihan) {
         cout << "\n===== SISTEM KATALOG PRODUK =====" << endl;
         cout << "1. Tambah Kategori" << endl;
         cout << "2. Tambah Produk ke Kategori" << endl;
@@ -17,10 +18,9 @@ int main() {
         cout << "6. Update Produk" << endl;
         cout << "7. Hapus Produk" << endl;
         cout << "8. Total Stok Semua Produk" << endl;
-        cout << "9. Produk dengan Stok Paling Sedikit" << endl;
-        cout << "10. Urutkan Berdasarkan Harga" << endl;
-        cout << "11. Produk Stok Terendah" << endl;
-        cout << "0. Keluar" << endl;
+        cout << "9. Urutkan Berdasarkan Harga" << endl;
+        cout << "10. Produk Stok Terendah" << endl;
+        cout << "11. Keluar" << endl;
         cout << "Pilih menu: ";
         cin >> pilihan;
 
@@ -107,15 +107,6 @@ int main() {
                  << totalStok_103012400173(L) << endl;
 
         } else if (pilihan == 9) {
-            adrProduk P = produkStokMinimum_103012400173(L);
-            if (P != NULL) {
-                cout << "Produk dengan stok paling sedikit:" << endl;
-                cout << "Nama : " << P->info.namaProduk << endl;
-                cout << "Stok : " << P->info.stok << endl;
-            } else {
-                cout << "Data masih kosong." << endl;
-            }
-        } else if (pilihan == 10) {
             sortProdukByHarga(L);
         } else if (pilihan == 11) {
             adrProduk P = produkStokMinimum_103012400173(L);
@@ -126,15 +117,12 @@ int main() {
             cout << "Harga   : " << P->info.harga << endl;
             cout << "Stok    : " << P->info.stok << endl;
             cout << "Total   : " << P->info.harga * P->info.stok << endl;
-        } else {
-            cout << "Tidak ada data produk!" << endl;
-    }
-}
-
-    } while (pilihan != 0);
+            } else {
+                cout << "Tidak ada data produk!" << endl;
+            }
+        }
+    } while (pilihan != 11);
 
     cout << "Program selesai." << endl;
     return 0;
 }
-
-

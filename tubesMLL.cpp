@@ -1,6 +1,4 @@
-#include "tubesMLL.h"
-
-/* ================= PRIMITIVES ================= */
+#include "TUBES.h"
 
 void createList_103012400173(ListKategori &L) {
     L.first = NULL;
@@ -9,25 +7,27 @@ void createList_103012400173(ListKategori &L) {
 
 adrKategori createKategori_103012400173(string namaKategori) {
     adrKategori P = new elemenKategori;
+
     P->info.namaKategori = namaKategori;
     P->next = NULL;
     P->prev = NULL;
     P->firstProduk = NULL;
+
     return P;
 }
 
 adrProduk createProduk_103012400173(int id, string nama, float harga, int stok) {
     adrProduk P = new elemenProduk;
+
     P->info.id = id;
     P->info.namaProduk = nama;
     P->info.harga = harga;
     P->info.stok = stok;
     P->next = NULL;
     P->prev = NULL;
+
     return P;
 }
-
-/* ================= INSERT KATEGORI ================= */
 
 void insertLastKategori_103012400173(ListKategori &L, adrKategori P) {
     if (L.first == NULL) {
@@ -40,10 +40,9 @@ void insertLastKategori_103012400173(ListKategori &L, adrKategori P) {
     }
 }
 
-/* ================= INSERT PRODUK KE KATEGORI ================= */
-
 void insertProdukToKategori_103012400173(ListKategori &L, string namaKategori, adrProduk P) {
     adrKategori K = searchKategori_103012400173(L, namaKategori);
+
     if (K != NULL) {
         if (K->firstProduk == NULL) {
             K->firstProduk = P;
@@ -58,10 +57,9 @@ void insertProdukToKategori_103012400173(ListKategori &L, string namaKategori, a
     }
 }
 
-/* ================= DISPLAY ================= */
-
 void displayKategori_103012400173(ListKategori L) {
     adrKategori P = L.first;
+
     while (P != NULL) {
         cout << "Kategori: " << P->info.namaKategori << endl;
         P = P->next;
@@ -70,6 +68,7 @@ void displayKategori_103012400173(ListKategori L) {
 
 void displayProduk_103012400173(ListKategori L) {
     adrKategori K = L.first;
+
     while (K != NULL) {
         cout << "\nKategori: " << K->info.namaKategori << endl;
         cout << "==================================" << endl;
@@ -90,17 +89,14 @@ void displayProduk_103012400173(ListKategori L) {
             totalKategori += totalHarga;
             P = P->next;
         }
-
         cout << "Total nilai kategori: " << totalKategori << endl;
         K = K->next;
     }
 }
 
-
-/* ================= SEARCH ================= */
-
 adrKategori searchKategori_103012400173(ListKategori L, string namaKategori) {
     adrKategori P = L.first;
+
     while (P != NULL) {
         if (P->info.namaKategori == namaKategori) {
             return P;
@@ -112,6 +108,7 @@ adrKategori searchKategori_103012400173(ListKategori L, string namaKategori) {
 
 adrProduk searchProdukByID_103012400173(ListKategori L, int id) {
     adrKategori K = L.first;
+
     while (K != NULL) {
         adrProduk P = K->firstProduk;
         while (P != NULL) {
@@ -125,10 +122,9 @@ adrProduk searchProdukByID_103012400173(ListKategori L, int id) {
     return NULL;
 }
 
-/* ================= UPDATE ================= */
-
 bool updateProduk_103012400173(ListKategori &L, int id, string namaBaru, float hargaBaru, int stokBaru) {
     adrProduk P = searchProdukByID_103012400173(L, id);
+
     if (P != NULL) {
         P->info.namaProduk = namaBaru;
         P->info.harga = hargaBaru;
@@ -138,10 +134,9 @@ bool updateProduk_103012400173(ListKategori &L, int id, string namaBaru, float h
     return false;
 }
 
-/* ================= DELETE PRODUK ================= */
-
 void deleteProduk_103012400173(ListKategori &L, int id) {
     adrKategori K = L.first;
+
     while (K != NULL) {
         adrProduk P = K->firstProduk;
         while (P != NULL) {
@@ -163,11 +158,10 @@ void deleteProduk_103012400173(ListKategori &L, int id) {
     }
 }
 
-/* ================= UTIL ================= */
-
 int totalStok_103012400173(ListKategori L) {
     int total = 0;
     adrKategori K = L.first;
+
     while (K != NULL) {
         adrProduk P = K->firstProduk;
         while (P != NULL) {
@@ -182,6 +176,7 @@ int totalStok_103012400173(ListKategori L) {
 adrProduk produkStokMinimum_103012400173(ListKategori L) {
     adrProduk minP = NULL;
     adrKategori K = L.first;
+
     while (K != NULL) {
         adrProduk P = K->firstProduk;
         while (P != NULL) {
@@ -202,15 +197,14 @@ void sortProdukByHarga(ListKategori &L) {
         adrProduk P = K->firstProduk;
 
         if (P != NULL && P->next != NULL) {
-            bool swapped;
+            bool swapped = true;
 
-            do {
+            while (swapped) {
                 swapped = false;
                 adrProduk Q = K->firstProduk;
 
                 while (Q->next != NULL) {
                     if (Q->info.harga > Q->next->info.harga) {
-                        // tukar info
                         Produk temp = Q->info;
                         Q->info = Q->next->info;
                         Q->next->info = temp;
@@ -220,9 +214,7 @@ void sortProdukByHarga(ListKategori &L) {
                 }
             } while (swapped);
         }
-
         K = K->next;
     }
-
     cout << "Produk berhasil diurutkan berdasarkan harga (ascending)." << endl;
 }
